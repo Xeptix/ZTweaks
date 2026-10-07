@@ -1,0 +1,1637 @@
+{
+  "schema": 1,
+  "pages": [
+    {
+      "id": "match",
+      "title": "MATCH",
+      "hint": "Match flow, starting conditions, and global rules.",
+      "rows": [
+        {
+          "dvar": "zt_auto_restart",
+          "label": "AUTO RESTART LEVEL",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 2,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Restart the current level after the normal game-over results have been shown. DEFAULT is OFF.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "labels": [
+            "OFF",
+            "ON"
+          ]
+        },
+        {
+          "dvar": "zt_next_map",
+          "label": "NEXT MAP",
+          "type": "enum",
+          "kind": "choice",
+          "default": "same",
+          "storage_slot": 3,
+          "boundary": "NEXT GAME OVER",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Choose the map selected after every completed game. This works independently of Auto Restart: with Auto Restart off, ZTweaks changes the lobby selection without launching it. Random choices exclude the current map when another valid map exists.",
+          "values": [
+            "same",
+            "stock",
+            "custom",
+            "all"
+          ],
+          "labels": [
+            "CURRENT MAP",
+            "RANDOM STOCK",
+            "RANDOM CUSTOM",
+            "RANDOM ALL"
+          ]
+        },
+        {
+          "dvar": "zt_starting_round",
+          "label": "STARTING ROUND",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 4,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Round used when a new match begins. GAME DEFAULT leaves the map's normal starting round and starting-points calculation untouched.",
+          "values": [
+            "0",
+            "1",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30",
+            "50"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "1",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30",
+            "50"
+          ]
+        },
+        {
+          "dvar": "zt_starting_points",
+          "label": "STARTING POINTS",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 10,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Points given to each player when a new match begins. GAME DEFAULT preserves the map's normal behavior, including BO3's stock starting-round calculation of 500 points per selected round.",
+          "values": [
+            "0",
+            "500",
+            "1000",
+            "2500",
+            "5000",
+            "10000",
+            "25000",
+            "50000"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "500",
+            "1,000",
+            "2,500",
+            "5,000",
+            "10,000",
+            "25,000",
+            "50,000"
+          ]
+        },
+        {
+          "dvar": "zt_headshots_only",
+          "label": "HEADSHOTS ONLY",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 20,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Require headshots for standard zombie kills using the stock Zombies rule. OFF is inert and leaves the map's own game setting unchanged.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "labels": [
+            "OFF",
+            "ON"
+          ]
+        },
+        {
+          "dvar": "zt_game_start_delay",
+          "label": "GAME START DELAY",
+          "type": "int",
+          "kind": "number",
+          "default": "-1",
+          "storage_slot": 31,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Additional seconds before ordinary zombies begin spawning in the first round. GAME DEFAULT preserves the map's own delay; this does not remove the stock round-opening presentation or map-authored scripted waits.",
+          "values": [
+            "-1",
+            "0",
+            "2",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "NO EXTRA DELAY",
+            "2 SECONDS",
+            "5 SECONDS",
+            "10 SECONDS",
+            "15 SECONDS",
+            "20 SECONDS",
+            "30 SECONDS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "player",
+      "title": "PLAYER",
+      "hint": "Player stats, perks, and movement.",
+      "rows": [
+        {
+          "dvar": "zt_perk_limit",
+          "label": "PERK LIMIT",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 1,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Maximum perks a player may hold. DEFAULT leaves the map or ZShare in control; a number replaces the base limit while preserving map-added slots; UNLIMITED removes the limit. ZTweaks takes precedence over ZShare when enabled.",
+          "values": [
+            "0",
+            "4",
+            "5",
+            "6",
+            "8",
+            "-1"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "4",
+            "5",
+            "6",
+            "8",
+            "UNLIMITED"
+          ]
+        },
+        {
+          "dvar": "zt_player_health",
+          "label": "PLAYER HEALTH",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 5,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of normal player health. GAME DEFAULT leaves the map in control. Perks continue to scale from the modified base health.",
+          "values": [
+            "0",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_player_speed",
+          "label": "PLAYER SPEED",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 18,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of normal player movement speed applied at spawn. GAME DEFAULT leaves movement untouched so map-authored movement rules remain authoritative.",
+          "values": [
+            "0",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_random_starting_perks",
+          "label": "RANDOM STARTING PERKS",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 12,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Number of random perks granted independently to each player when they spawn. NONE is inert. Perks are chosen without duplicates from those registered by the current map; if fewer are available, every available perk is granted.",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "labels": [
+            "NONE",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "dvar": "zt_start_all_perks",
+          "label": "START WITH ALL PERKS",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 17,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Grant every perk registered by the current map at spawn. OFF is inert. When enabled, this takes precedence over Random Starting Perks.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "labels": [
+            "OFF",
+            "ON"
+          ]
+        },
+        {
+          "dvar": "zt_point_gain",
+          "label": "POINT GAIN",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 34,
+          "storage_factor": 1,
+          "storage_radix": 9,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Percentage of normal positive score awards, including zombie damage, kills, headshots, and standard repairs. GAME DEFAULT leaves every map-authored award unchanged; point costs are never scaled.",
+          "values": ["0", "25", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "25%", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_weapon_damage",
+          "label": "WEAPON DAMAGE",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 38,
+          "storage_factor": 1,
+          "storage_radix": 9,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Percentage of normal player weapon damage dealt to zombies. Melee uses its own setting. GAME DEFAULT preserves the stock and custom-map damage path.",
+          "values": ["0", "25", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "25%", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_melee_damage",
+          "label": "MELEE DAMAGE",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 39,
+          "storage_factor": 1,
+          "storage_radix": 9,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Percentage of normal player melee damage dealt to zombies. GAME DEFAULT leaves knife, melee weapon, perk, and map behavior untouched.",
+          "values": ["0", "25", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "25%", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_no_explosive_self_damage",
+          "label": "EXPLOSIVE SELF-DAMAGE",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 43,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Prevent a player's own grenades, launchers, and other standard explosives from damaging that player. OFF leaves the stock damage callback untouched.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "NO SELF-DAMAGE"]
+        },
+        {
+          "dvar": "zt_fall_damage",
+          "label": "FALL DAMAGE",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 40,
+          "storage_factor": 1,
+          "storage_radix": 9,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Scale standard fall damage or turn it off. GAME DEFAULT delegates to the map; custom scripted hazards are not reclassified as falls.",
+          "values": ["0", "-1", "25", "50", "75", "100", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "OFF", "25%", "50%", "75%", "100%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_down_limit",
+          "label": "DOWN LIMIT",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 45,
+          "boundary": "NEXT DOWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Maximum ordinary co-op downs before stock bleeds the player out instead of allowing another revive. UNLIMITED keeps stock co-op's unlimited downs. Solo auto-revive, special-role and non-composable map routes stay stock and report unavailable.",
+          "values": ["0", "-1", "1", "2", "3", "5", "10"],
+          "labels": ["GAME DEFAULT", "UNLIMITED", "1", "2", "3", "5", "10"]
+        },
+        {
+          "dvar": "zt_revive_time",
+          "label": "REVIVE TIME",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 46,
+          "boundary": "NEXT DOWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Percentage of the map's normal revive interaction time. GAME DEFAULT preserves map, perk, and equipment modifiers.",
+          "values": ["0", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_bleedout_time",
+          "label": "BLEED-OUT TIME",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 47,
+          "boundary": "NEXT DOWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Percentage of the map's normal last-stand bleed-out duration. GAME DEFAULT preserves the map's timer.",
+          "values": ["0", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_spawn_protection",
+          "label": "SPAWN PROTECTION",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 48,
+          "boundary": "NEXT SPAWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Seconds of damage immunity after a player spawns or respawns. GAME DEFAULT adds no ZTweaks protection and leaves map-authored protection alone.",
+          "values": ["0", "1", "2", "3", "5", "10"],
+          "labels": ["GAME DEFAULT", "1 SECOND", "2 SECONDS", "3 SECONDS", "5 SECONDS", "10 SECONDS"]
+        },
+        {
+          "dvar": "zt_lose_perks_on_down",
+          "label": "LOSE PERKS ON DOWN",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 49,
+          "boundary": "NEXT DOWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Choose how many perks are removed through the standard down path. MAP DEFAULT keeps the map rule; NONE attempts to preserve every standard registered perk.",
+          "values": ["default", "all", "none", "1", "2", "3", "4"],
+          "labels": ["MAP DEFAULT", "ALL", "NONE", "1", "2", "3", "4"]
+        },
+        {
+          "dvar": "zt_keep_weapons_bleedout",
+          "label": "KEEP WEAPONS AFTER BLEED-OUT",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 50,
+          "boundary": "NEXT BLEED-OUT",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Restore a player's standard weapon inventory after bleeding out and respawning. OFF leaves the map's death and respawn loadout untouched.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        }
+      ]
+    },
+    {
+      "id": "characters",
+      "authority": "player",
+      "title": "CHARACTERS",
+        "hint": "Choose a favorite by cast. Supports stock maps and custom maps with a compatible adapter.",
+      "rows": [
+        {
+          "dvar": "scr_zt_char_victis",
+          "label": "VICTIS",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 17,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred character on TranZit, Die Rise, or Buried. Solo and co-op: host wins ties; tied non-hosts draw randomly. RANDOM keeps the stock choice unless displaced. No T7 stock map uses Victis.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "RUSSMAN", "STUHLINGER", "MISTY", "MARLTON"]
+        },
+        {
+          "dvar": "scr_zt_char_mob",
+          "label": "MOB OF THE DEAD",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 20,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred Mob of the Dead character, solo or co-op. Host wins ties; tied non-hosts draw randomly. RANDOM keeps the stock choice unless displaced. No T7 stock map uses this cast.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "FINN", "SAL", "BILLY", "WEASEL"]
+        },
+        {
+          "dvar": "scr_zt_char_origins",
+          "label": "ORIGINS",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 24,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred Origins character in either game, solo or co-op; saved separately from Primis. Host wins ties; tied non-hosts draw randomly. RANDOM keeps stock unless displaced. Required co-op story roles are preserved.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "DEMPSEY", "NIKOLAI", "RICHTOFEN", "TAKEO"]
+        },
+        {
+          "dvar": "scr_zt_char_soe",
+          "label": "SHADOWS OF EVIL",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 25,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred Shadows of Evil character, solo or co-op. Host wins ties; tied non-hosts draw randomly. RANDOM keeps the stock choice unless displaced. No T6 stock map uses this cast.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "FLOYD", "JACK VINCENT", "JESSICA", "NERO"]
+        },
+        {
+          "dvar": "scr_zt_char_primis",
+          "label": "PRIMIS",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 43,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred character on The Giant, Der Eisendrache, Zetsubou, Gorod Krovi or Revelations, solo or co-op. Origins is separate. Host wins ties; tied non-hosts draw randomly. Required co-op story roles are preserved.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "DEMPSEY", "NIKOLAI", "RICHTOFEN", "TAKEO"]
+        },
+        {
+          "dvar": "scr_zt_char_ultimis",
+          "label": "ULTIMIS",
+          "type": "enum",
+          "kind": "choice",
+          "default": "-1",
+          "storage_slot": 44,
+          "storage_factor": 3,
+          "storage_radix": 5,
+          "boundary": "NEXT MATCH",
+          "scope": "PERSONAL",
+          "games": ["t6", "t7"],
+          "description": "Preferred character on BO3 Moon, Ascension, Shangri-La, Kino, Nacht, Verruckt or Shi No Numa. Solo and co-op: host wins ties; tied non-hosts draw randomly. Required co-op roles are preserved. No T6 stock map uses Ultimis.",
+          "values": ["-1", "0", "1", "2", "3"],
+          "labels": ["RANDOM (VANILLA)", "DEMPSEY", "NIKOLAI", "RICHTOFEN", "TAKEO"]
+        }
+      ]
+    },
+    {
+      "id": "loadout",
+      "title": "LOADOUT",
+      "hint": "Starting weapons, grenades, equipment, and carrying limits.",
+      "rows": [
+        {
+          "dvar": "zt_starting_weapon",
+          "label": "STARTING WEAPON",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 9,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Weapon class that replaces the map's primary starting weapon. MAP DEFAULT preserves the map choice. If the selected class is unavailable, ZTweaks safely keeps the map default.",
+          "values": [
+            "default",
+            "pistol",
+            "burst",
+            "smg",
+            "shotgun",
+            "ar",
+            "lmg",
+            "sniper"
+          ],
+          "labels": [
+            "MAP DEFAULT",
+            "PISTOL",
+            "BURST PISTOL",
+            "SMG",
+            "SHOTGUN",
+            "ASSAULT RIFLE",
+            "LMG",
+            "SNIPER RIFLE"
+          ]
+        },
+        {
+          "dvar": "zt_secondary_starting_weapon",
+          "label": "SECONDARY WEAPON",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 11,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Optional additional starting weapon class. MAP DEFAULT grants no extra weapon. This is separate from the primary Starting Weapon override and does not replace or select the primary.",
+          "values": [
+            "default",
+            "pistol",
+            "burst",
+            "smg",
+            "shotgun",
+            "ar",
+            "lmg",
+            "sniper"
+          ],
+          "labels": [
+            "MAP DEFAULT",
+            "PISTOL",
+            "BURST PISTOL",
+            "SMG",
+            "SHOTGUN",
+            "ASSAULT RIFLE",
+            "LMG",
+            "SNIPER RIFLE"
+          ]
+        },
+        {
+          "dvar": "zt_starting_grenade",
+          "label": "STARTING GRENADE",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 13,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Lethal grenade type given at spawn. MAP DEFAULT preserves the map's choice. A selected type is used only when that map has registered a compatible grenade.",
+          "values": [
+            "default",
+            "frag",
+            "semtex"
+          ],
+          "labels": [
+            "MAP DEFAULT",
+            "FRAG",
+            "SEMTEX"
+          ]
+        },
+        {
+          "dvar": "zt_starting_grenade_count",
+          "label": "STARTING GRENADES",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 14,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Number of lethal grenades given at spawn. GAME DEFAULT preserves stock start ammo. When Max Grenades is also enabled, the lower value wins at spawn.",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "8",
+            "10"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6",
+            "8",
+            "10"
+          ]
+        },
+        {
+          "dvar": "zt_max_grenades",
+          "label": "MAX GRENADES",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 7,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Carried lethal-grenade capacity. GAME DEFAULT leaves the weapon and map limit untouched; enabled values initialize newly granted grenades to this amount and cap later grants at it.",
+          "values": [
+            "0",
+            "2",
+            "4",
+            "6",
+            "8",
+            "10"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "2",
+            "4",
+            "6",
+            "8",
+            "10"
+          ]
+        },
+        {
+          "dvar": "zt_starting_equipment",
+          "label": "STARTING EQUIPMENT",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 15,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Tactical or placeable equipment given at spawn. MAP DEFAULT preserves the map choice. Unsupported items fail closed instead of substituting a different type.",
+          "values": [
+            "default",
+            "monkey",
+            "emp",
+            "mine"
+          ],
+          "labels": [
+            "MAP DEFAULT",
+            "MONKEY BOMB",
+            "EMP GRENADE",
+            "MINE"
+          ]
+        },
+        {
+          "dvar": "zt_starting_equipment_count",
+          "label": "STARTING EQUIPMENT COUNT",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 16,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Amount of the active tactical or placeable equipment given at spawn. GAME DEFAULT preserves stock start ammo. When Max Equipment is enabled, the lower value wins at spawn.",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ]
+        },
+        {
+          "dvar": "zt_max_equipment",
+          "label": "MAX EQUIPMENT",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 8,
+          "boundary": "NEXT SPAWN",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Carried tactical or placeable-equipment capacity. GAME DEFAULT leaves each item and map in control; enabled values initialize newly granted equipment to this amount and cap later grants at it.",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ]
+        },
+        {
+          "dvar": "zt_starting_ammo",
+          "label": "STARTING AMMO",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 35,
+          "storage_factor": 1,
+          "storage_radix": 6,
+          "boundary": "NEXT SPAWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Percentage of normal starting ammo for the player's starting weapons. GAME DEFAULT preserves stock ammo; EMPTY leaves the weapon with no reserve or loaded rounds.",
+          "values": ["0", "-1", "25", "50", "75", "100"],
+          "labels": ["GAME DEFAULT", "EMPTY", "25%", "50%", "75%", "FULL"]
+        },
+        {
+          "dvar": "zt_reserve_ammo",
+          "label": "MAX RESERVE AMMO",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 36,
+          "storage_factor": 1,
+          "storage_radix": 8,
+          "boundary": "NEXT SPAWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Scale the native reserve ammo granted to selected or inherited starting weapons while retaining each weapon's own magazine and ammo type. Values above an asset's hard capacity safely clamp and report degraded compatibility. GAME DEFAULT preserves stock ammo.",
+          "values": ["0", "50", "75", "100", "125", "150", "200", "300"],
+          "labels": ["GAME DEFAULT", "50%", "75%", "100%", "125%", "150%", "200%", "300%"]
+        },
+        {
+          "dvar": "zt_starting_weapon_upgraded",
+          "label": "STARTING WEAPON UPGRADED",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 37,
+          "storage_factor": 1,
+          "storage_radix": 4,
+          "boundary": "NEXT SPAWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Spawn with the selected ZTweaks starting weapon slots Pack-a-Punched when the map registers a safe upgraded variant. MAP DEFAULT leaves both slots unmodified.",
+          "values": ["default", "primary", "secondary", "both"],
+          "labels": ["MAP DEFAULT", "PRIMARY", "SECONDARY", "BOTH"]
+        }
+      ]
+    },
+    {
+      "id": "zombies",
+      "title": "ZOMBIES",
+      "hint": "Zombie health, speed, and round population.",
+      "rows": [
+        {
+          "dvar": "zt_zombie_health",
+          "label": "ZOMBIE HEALTH",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 6,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of the map's normal zombie-health curve. GAME DEFAULT leaves both starting health and round-to-round growth untouched. RANDOM independently chooses one listed percentage when each match initializes.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "150",
+            "200",
+            "300",
+            "500",
+            "-1"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "150%",
+            "200%",
+            "300%",
+            "500%",
+            "RANDOM"
+          ]
+        },
+        {
+          "dvar": "zt_zombie_speed",
+          "label": "ZOMBIE SPEED",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 19,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of the map's normal zombie speed curve. GAME DEFAULT is inert. RANDOM independently chooses one listed percentage when each match initializes. Standard round zombies are scaled; map-owned special enemies remain untouched.",
+          "values": [
+            "0",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300",
+            "-1"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%",
+            "RANDOM"
+          ]
+        },
+        {
+          "dvar": "zt_zombies_per_round",
+          "label": "ZOMBIES PER ROUND",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 21,
+          "boundary": "NEXT ROUND",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of the standard zombie count calculated for each round. GAME DEFAULT is inert. Scripted special rounds and objective spawns remain map-controlled.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_round_delay",
+          "label": "ROUND DELAY",
+          "type": "int",
+          "kind": "number",
+          "default": "-1",
+          "storage_slot": 29,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Seconds between a completed round and the next round. GAME DEFAULT preserves the map's delay. INSTANT removes only the standard between-round wait; round-change HUD and map-authored scripted waits remain intact.",
+          "values": [
+            "-1",
+            "0",
+            "2",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "INSTANT",
+            "2 SECONDS",
+            "5 SECONDS",
+            "10 SECONDS",
+            "15 SECONDS",
+            "20 SECONDS",
+            "30 SECONDS"
+          ]
+        },
+        {
+          "dvar": "zt_zombie_spawn_rate",
+          "label": "ZOMBIE SPAWN RATE",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 30,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of the map's normal standard-zombie spawn cadence. Higher values shorten the delay between ordinary spawns. GAME DEFAULT is inert; special, objective, and scripted spawners remain map-controlled.",
+          "values": [
+            "0",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "title": "WORLD",
+      "hint": "Power, doors, power-ups, and map-owned systems.",
+      "rows": [
+        {
+          "dvar": "zt_start_power_on",
+          "label": "START WITH POWER ON",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 24,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Turn on the map's stock power consumers at match start. Global systems use the common power state; zoned systems activate published perk, random-perk, and door power zones. Activation rituals/generators and their counters remain map-controlled; downstream systems that listen to real power, including stock traversal and Pack-a-Punch, still unlock.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "labels": [
+            "OFF",
+            "ON"
+          ]
+        },
+        {
+          "dvar": "zt_start_doors_open",
+          "label": "START WITH DOORS OPEN",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 25,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Open ordinary, delayed, and power-gated purchasable doors, barriers, debris, and airlocks for free through their stock blocker paths after the first player spawns. Kill-counter and custom scripted quest blockers remain map-controlled.",
+          "values": [
+            "0",
+            "1"
+          ],
+          "labels": [
+            "OFF",
+            "ON"
+          ]
+        },
+        {
+          "dvar": "zt_powerup_ground_time",
+          "label": "POWER-UP GROUND TIME",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 22,
+          "boundary": "NEXT DROP",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Seconds a normal dropped power-up remains collectible before its stock flashing phase begins. GAME DEFAULT uses 15 seconds. Map-authored custom lifetimes, infinite quest drops, and BO3 Temporal Gift remain authoritative.",
+          "values": [
+            "0",
+            "5",
+            "10",
+            "15",
+            "20",
+            "30",
+            "45",
+            "60"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "5 SECONDS",
+            "10 SECONDS",
+            "15 SECONDS",
+            "20 SECONDS",
+            "30 SECONDS",
+            "45 SECONDS",
+            "60 SECONDS"
+          ]
+        },
+        {
+          "dvar": "zt_powerup_effect_time",
+          "label": "POWER-UP EFFECT TIME",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 33,
+          "boundary": "NEXT POWER-UP",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Percentage of each timed power-up's map-selected effect duration. This includes team, global, and player-only timed effects registered through the stock power-up system. GAME DEFAULT preserves every map-authored duration.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_powerup_drop_rate",
+          "label": "POWER-UP DROP RATE",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 23,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Multiplier for stock regular score-threshold power-up drops. Higher values reach each drop threshold sooner. GAME DEFAULT preserves the map threshold; max-per-round, random kill drops, and scripted drops remain untouched.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "125",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_powerup_max_per_round",
+          "label": "POWER-UP DROP CAP",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 32,
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6",
+            "t7"
+          ],
+          "description": "Maximum regular score-threshold power-up drops allowed in each round. GAME DEFAULT preserves the map's own cap. Scripted rewards, boss drops, quest drops, and other map-authored power-ups remain untouched.",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10"
+          ]
+        },
+        {
+          "dvar": "zt_box_quality",
+          "label": "MYSTERY BOX QUALITY",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 41,
+          "storage_factor": 1,
+          "storage_radix": 4,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Adjust the standard Mystery Box weapon pool. NO WONDER WEAPONS removes registered wonder weapons; IMPROVED raises the chance of stronger registered weapons; FULL MAP POOL bypasses map-authored weighting while preserving stock ownership and quest-safety checks.",
+          "values": ["default", "no_wonders", "improved", "everything"],
+          "labels": ["MAP DEFAULT", "NO WONDER WEAPONS", "IMPROVED", "FULL MAP POOL"]
+        },
+        {
+          "dvar": "zt_box_lock",
+          "label": "MYSTERY BOX LOCK",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 44,
+          "storage_factor": 1,
+          "storage_radix": 3,
+          "storage_legacy_index": true,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Prevent the standard Mystery Box from randomly relocating after normal purchases. Explicit scripted or quest-owned box moves remain map-controlled. OFF preserves every map-authored relocation rule.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "LOCK LOCATION"]
+        },
+        {
+          "dvar": "zt_powerup_stacking",
+          "label": "POWER-UP STACKING",
+          "type": "enum",
+          "kind": "choice",
+          "default": "default",
+          "storage_slot": 42,
+          "storage_factor": 1,
+          "storage_radix": 4,
+          "boundary": "NEXT POWER-UP",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Choose how a repeated standard timed power-up affects its active timer. REFRESH restarts the configured duration, EXTEND adds another duration, and IGNORE preserves the current timer.",
+          "values": ["default", "refresh", "extend", "ignore"],
+          "labels": ["GAME DEFAULT", "REFRESH", "EXTEND", "IGNORE"]
+        },
+        {
+          "dvar": "zt_bank_limit",
+          "label": "BANK LIMIT",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "boundary": "NEXT MATCH",
+          "games": [
+            "t6"
+          ],
+          "description": "Maximum points stored in the BO2 persistent bank. GAME DEFAULT preserves the stock 250,000-point limit. On maps without the standard bank capability this setting safely does nothing.",
+          "values": [
+            "0",
+            "50000",
+            "100000",
+            "250000",
+            "500000",
+            "1000000"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "50,000",
+            "100,000",
+            "250,000",
+            "500,000",
+            "1,000,000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "challenges",
+      "title": "CHALLENGES",
+      "hint": "Optional restrictions and randomized challenge rules.",
+      "rows": [
+        {
+          "dvar": "zt_challenge_no_perks",
+          "label": "NO PERKS",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 34,
+          "storage_factor": 9,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Disable standard perk acquisition and ZTweaks starting-perk grants. Map quest rewards that cannot be safely intercepted are reported as a compatibility limitation.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_no_pap",
+          "label": "NO PACK-A-PUNCH",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 35,
+          "storage_factor": 6,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Disable the standard Pack-a-Punch interaction when the map exposes it safely. Scripted upgrade quests remain map-controlled and are reported if they cannot be disabled.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_no_box",
+          "label": "NO MYSTERY BOX",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 36,
+          "storage_factor": 8,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Disable the standard Mystery Box. Custom scripted weapon lotteries remain untouched unless they register the stock box capability.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_wall_only",
+          "label": "WALL WEAPONS ONLY",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 37,
+          "storage_factor": 4,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Disable standard non-wall weapon acquisition while leaving wall buys enabled. Unsupported map-authored reward systems are reported instead of forcibly removed.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_starting_room",
+          "label": "STARTING ROOM ONLY",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 38,
+          "storage_factor": 9,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Keep players in the map's starting zone only when the map safely identifies its exit doors. The challenge disables itself rather than guessing at scripted progression blockers.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_one_box",
+          "label": "ONE-BOX CHALLENGE",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 39,
+          "storage_factor": 9,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Allow each player one completed standard Mystery Box purchase. Maps without the stock box-use notification disable this rule safely.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_gun_game",
+          "label": "GUN GAME",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 40,
+          "storage_factor": 9,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Progress each player through a compatible registered weapon sequence using zombie kills. The challenge disables itself if the map cannot supply a safe progression list.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_random_loadout",
+          "label": "RANDOM STARTING LOADOUT",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 41,
+          "storage_factor": 4,
+          "storage_radix": 2,
+          "boundary": "NEXT SPAWN",
+          "scope": "HOST / PER PLAYER",
+          "games": ["t6", "t7"],
+          "description": "Choose an independent compatible registered starting weapon loadout for each player. Explicit primary and secondary starting-weapon choices take precedence.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        },
+        {
+          "dvar": "zt_challenge_random_rules",
+          "label": "RANDOMIZED RULES",
+          "type": "bool",
+          "kind": "flag",
+          "default": "0",
+          "storage_slot": 42,
+          "storage_factor": 4,
+          "storage_radix": 2,
+          "boundary": "NEXT MATCH",
+          "scope": "HOST / SHARED",
+          "games": ["t6", "t7"],
+          "description": "Select one shared, compatible challenge rule for the match and report the chosen rule to the host. Explicitly enabled challenge rows are never overwritten.",
+          "values": ["0", "1"],
+          "labels": ["OFF", "ON"]
+        }
+      ]
+    },
+    {
+      "id": "gobblegum",
+      "title": "GOBBLEGUM",
+      "hint": "GobbleGum activation, time, and round limits.",
+      "rows": [
+        {
+          "dvar": "zt_gobblegum_uses",
+          "label": "GOBBLEGUM USES",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 26,
+          "boundary": "NEXT GUM",
+          "games": [
+            "t7"
+          ],
+          "description": "Percentage of each activation-limited GobbleGum's stock number of uses. Values round to at least one use. GAME DEFAULT preserves every gum's registered limit.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_gobblegum_time",
+          "label": "GOBBLEGUM TIME",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 27,
+          "boundary": "NEXT GUM",
+          "games": [
+            "t7"
+          ],
+          "description": "Percentage of each time-limited GobbleGum's stock duration in seconds. Values round to at least one second. GAME DEFAULT preserves every gum's registered duration.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        },
+        {
+          "dvar": "zt_gobblegum_rounds",
+          "label": "GOBBLEGUM ROUNDS",
+          "type": "int",
+          "kind": "number",
+          "default": "0",
+          "storage_slot": 28,
+          "boundary": "NEXT GUM",
+          "games": [
+            "t7"
+          ],
+          "description": "Percentage of each round-limited GobbleGum's stock round count. Values round to at least one round. Event-limited gums are not changed.",
+          "values": [
+            "0",
+            "25",
+            "50",
+            "75",
+            "100",
+            "150",
+            "200",
+            "300"
+          ],
+          "labels": [
+            "GAME DEFAULT",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "150%",
+            "200%",
+            "300%"
+          ]
+        }
+      ]
+    }
+  ]
+}
