@@ -1,4 +1,4 @@
-// ZTWEAKS T6 v1.0
+// ZTWEAKS T6 v1.1
 // Compatibility-first Zombies tweaks. Inactive live-boundary hooks preserve stock behavior.
 
 // T6 custom scripts do not inherit the stock Zombies include table. These
@@ -332,7 +332,7 @@ zt_register_self()
 zt_version()
 {
     // ZT_VERSION_BEGIN
-    return "1.0";
+    return "1.1";
     // ZT_VERSION_END
 }
 
@@ -481,7 +481,7 @@ zt_feature_message( name, reason )
         {
             if ( players[i] ishost() )
             {
-                players[i] iprintlnbold( "ZTweaks: " + zt_feature_label( name ) + " disabled - " + reason );
+                players[i] zt_notice( zt_notice_code( name, reason ), "ZTweaks: " + zt_feature_label( name ) + " disabled - " + reason );
                 return;
             }
         }
@@ -489,6 +489,334 @@ zt_feature_message( name, reason )
         elapsed = elapsed + 0.5;
     }
 }
+
+// ZT_NOTICE_DICTIONARY_BEGIN
+zt_notice_signature() { return 3180795; }
+zt_notice_code( name, reason )
+{
+    feature = 0;
+    if ( name == "auto_restart" ) feature = 1;
+    if ( name == "bank_limit" ) feature = 2;
+    if ( name == "bleedout_time" ) feature = 3;
+    if ( name == "box_lock" ) feature = 4;
+    if ( name == "box_quality" ) feature = 5;
+    if ( name == "challenge_gun_game" ) feature = 6;
+    if ( name == "challenge_no_box" ) feature = 7;
+    if ( name == "challenge_no_pap" ) feature = 8;
+    if ( name == "challenge_no_perks" ) feature = 9;
+    if ( name == "challenge_one_box" ) feature = 10;
+    if ( name == "challenge_random_loadout" ) feature = 11;
+    if ( name == "challenge_random_rules" ) feature = 12;
+    if ( name == "challenge_starting_room" ) feature = 13;
+    if ( name == "challenge_wall_only" ) feature = 14;
+    if ( name == "down_limit" ) feature = 15;
+    if ( name == "fall_damage" ) feature = 16;
+    if ( name == "game_start_delay" ) feature = 17;
+    if ( name == "gobblegum_rounds" ) feature = 18;
+    if ( name == "gobblegum_time" ) feature = 19;
+    if ( name == "gobblegum_uses" ) feature = 20;
+    if ( name == "headshots_only" ) feature = 21;
+    if ( name == "keep_weapons_bleedout" ) feature = 22;
+    if ( name == "lose_perks_on_down" ) feature = 23;
+    if ( name == "max_equipment" ) feature = 24;
+    if ( name == "max_grenades" ) feature = 25;
+    if ( name == "melee_damage" ) feature = 26;
+    if ( name == "next_map" ) feature = 27;
+    if ( name == "no_explosive_self_damage" ) feature = 28;
+    if ( name == "perk_limit" ) feature = 29;
+    if ( name == "player_health" ) feature = 30;
+    if ( name == "player_speed" ) feature = 31;
+    if ( name == "point_gain" ) feature = 32;
+    if ( name == "powerup_drop_rate" ) feature = 33;
+    if ( name == "powerup_effect_time" ) feature = 34;
+    if ( name == "powerup_ground_time" ) feature = 35;
+    if ( name == "powerup_max_per_round" ) feature = 36;
+    if ( name == "powerup_stacking" ) feature = 37;
+    if ( name == "random_starting_perks" ) feature = 38;
+    if ( name == "reserve_ammo" ) feature = 39;
+    if ( name == "revive_time" ) feature = 40;
+    if ( name == "round_delay" ) feature = 41;
+    if ( name == "secondary_starting_weapon" ) feature = 42;
+    if ( name == "spawn_protection" ) feature = 43;
+    if ( name == "start_all_perks" ) feature = 44;
+    if ( name == "start_doors_open" ) feature = 45;
+    if ( name == "start_power_on" ) feature = 46;
+    if ( name == "starting_ammo" ) feature = 47;
+    if ( name == "starting_equipment" ) feature = 48;
+    if ( name == "starting_equipment_count" ) feature = 49;
+    if ( name == "starting_grenade" ) feature = 50;
+    if ( name == "starting_grenade_count" ) feature = 51;
+    if ( name == "starting_points" ) feature = 52;
+    if ( name == "starting_round" ) feature = 53;
+    if ( name == "starting_weapon" ) feature = 54;
+    if ( name == "starting_weapon_upgraded" ) feature = 55;
+    if ( name == "weapon_damage" ) feature = 56;
+    if ( name == "zombie_health" ) feature = 57;
+    if ( name == "zombie_spawn_rate" ) feature = 58;
+    if ( name == "zombie_speed" ) feature = 59;
+    if ( name == "zombies_per_round" ) feature = 60;
+    if ( feature == 0 ) return 0;
+    code = 0;
+    if ( code == 0 ) code = zt_notice_reason_0( reason );
+    if ( code == 0 ) code = zt_notice_reason_48( reason );
+    if ( code == 0 ) code = zt_notice_reason_96( reason );
+    if ( code == 0 ) code = zt_notice_reason_144( reason );
+    if ( code == 0 ) return 0;
+    return feature * 512 + code;
+}
+zt_notice_reason_0( reason )
+{
+    if ( reason == "BO2 exposes no composable revive-time callback" ) return 1;
+    if ( reason == "BO2 has no safe pre-dispatch seam for ignoring a repeated timed power-up; stock stacking remains in control" ) return 2;
+    if ( reason == "BO2 weapon registrations do not identify wonder weapons generically" ) return 3;
+    if ( reason == "Buried did not initialize its single stock power switch" ) return 4;
+    if ( reason == "Buried rejected its stock switch request" ) return 5;
+    if ( reason == "Die Rise did not initialize its single stock power switch" ) return 6;
+    if ( reason == "Die Rise rejected its stock switch request" ) return 7;
+    if ( reason == "Double Points did not expose its stock team scalar" ) return 8;
+    if ( reason == "Insta-Kill did not expose its stock team state" ) return 9;
+    if ( reason == "Mob did not initialize its Afterlife perk-box waiter" ) return 10;
+    if ( reason == "Mob final-showdown health remains map-owned" ) return 11;
+    if ( reason == "Nuketown owns its randomized perk and Pack-a-Punch arrival cadence" ) return 12;
+    if ( reason == "Origins did not publish all six generator consumer zones" ) return 13;
+    if ( reason == "Origins did not publish its generator perk consumers" ) return 14;
+    if ( reason == "Origins exposes no initialized generator-consumer registry" ) return 15;
+    if ( reason == "Revelations exposes no initialized corruption-grid consumers" ) return 16;
+    if ( reason == "Revelations' stock power consumers rejected activation" ) return 17;
+    if ( reason == "Shadows exposes no complete six-stair/perk/door consumer registry" ) return 18;
+    if ( reason == "Shadows exposes no initialized perk/door power zones" ) return 19;
+    if ( reason == "Shadows' stock power consumers rejected activation" ) return 20;
+    if ( reason == "Shadows' stock stair/perk/door consumers rejected activation" ) return 21;
+    if ( reason == "Shangri-La exposes no initialized two-switch power route" ) return 22;
+    if ( reason == "Shangri-La's stock two-switch power route did not complete" ) return 23;
+    if ( reason == "The game reported a newer compatibility reason; see the ZTweaks runtime log." ) return 24;
+    if ( reason == "TranZit did not publish registered global-power consumers" ) return 25;
+    if ( reason == "Turned/Cleansed owns its 0.05-second role-conversion sentinel" ) return 26;
+    if ( reason == "Turned/Cleansed owns its arena and exposes no meaningful power capability" ) return 27;
+    if ( reason == "Turned/Cleansed owns its arena doors and barriers" ) return 28;
+    if ( reason == "Zetsubou exposes no initialized main-power consumer" ) return 29;
+    if ( reason == "Zetsubou's stock main-power consumer rejected activation" ) return 30;
+    if ( reason == "activated the stock main-power finalizer without marking temporary-generator/web/defend objectives complete" ) return 31;
+    if ( reason == "classic Double Points/Insta-Kill scaling requires an exact stock team scope" ) return 32;
+    if ( reason == "completed both stock water-wheel switches; Shangri-La's wait_for_power owns global activation" ) return 33;
+    if ( reason == "composed before Revelations' per-player damage pipeline" ) return 34;
+    if ( reason == "composed before the map's player-damage pipeline" ) return 35;
+    if ( reason == "composed with a late map callback" ) return 36;
+    if ( reason == "composed with late map and perk health owners" ) return 37;
+    if ( reason == "composed with late map drop thresholds" ) return 38;
+    if ( reason == "composed with late map round caps" ) return 39;
+    if ( reason == "composed with the map's live bleed-out duration" ) return 40;
+    if ( reason == "composed with the map's spawn movement scale" ) return 41;
+    if ( reason == "custom map exposes no authoritative base player-health variable" ) return 42;
+    if ( reason == "custom/counter/quest blocker owners were preserved; no ordinary blocker was safe to claim" ) return 43;
+    if ( reason == "first-round spawning began before the tweak could be applied" ) return 44;
+    if ( reason == "generic inventory restoration would duplicate map quest weapons" ) return 45;
+    if ( reason == "ignored an active duplicate at the pickup boundary" ) return 46;
+    if ( reason == "independent safe box firearm selected for each player" ) return 47;
+    if ( reason == "map and perk revive-time callbacks are composed before scaling" ) return 48;
+    return 0;
+}
+zt_notice_reason_48( reason )
+{
+    if ( reason == "map callback returned no spawn cadence" ) return 49;
+    if ( reason == "map did not expose standard Zombies match variables" ) return 50;
+    if ( reason == "map did not expose the standard round zombie total" ) return 51;
+    if ( reason == "map did not initialize round logic before the door-capability timeout" ) return 52;
+    if ( reason == "map does not enable standard score-threshold power-up drops" ) return 53;
+    if ( reason == "map exposes no active player for stock blocker callbacks" ) return 54;
+    if ( reason == "map exposes no authoritative starting-weapon replacement seam" ) return 55;
+    if ( reason == "map exposes no base player-health variable" ) return 56;
+    if ( reason == "map exposes no composable player-damage override" ) return 57;
+    if ( reason == "map exposes no composable player-last-stand callback" ) return 58;
+    if ( reason == "map exposes no initialized ordinary traversal blockers" ) return 59;
+    if ( reason == "map exposes no initialized published perk/door power zones" ) return 60;
+    if ( reason == "map exposes no initialized registered global-power consumers" ) return 61;
+    if ( reason == "map exposes no initialized standard door capability" ) return 62;
+    if ( reason == "map exposes no initialized stock global-power consumers" ) return 63;
+    if ( reason == "map exposes no registered perk list" ) return 64;
+    if ( reason == "map exposes no registered weapon pool" ) return 65;
+    if ( reason == "map exposes no safe standard purchasable doors" ) return 66;
+    if ( reason == "map exposes no safely owned timed effect storage" ) return 67;
+    if ( reason == "map exposes no standard between-round delay" ) return 68;
+    if ( reason == "map exposes no standard between-round delay callback" ) return 69;
+    if ( reason == "map exposes no standard game-start delay" ) return 70;
+    if ( reason == "map exposes no standard zombie spawn cadence" ) return 71;
+    if ( reason == "map exposes no standard zombie spawn cadence callback" ) return 72;
+    if ( reason == "map exposes no standard zombie-health curve" ) return 73;
+    if ( reason == "map exposes no standard zombie-speed curve" ) return 74;
+    if ( reason == "map exposes no stock-compatible perk machines" ) return 75;
+    if ( reason == "map has not published a compatible BO2 bank capability" ) return 76;
+    if ( reason == "map has not published a finalized stock GobbleGum registry" ) return 77;
+    if ( reason == "map has not published a perk-limit capability" ) return 78;
+    if ( reason == "map has not published a registered timed power-up capability" ) return 79;
+    if ( reason == "map has not published a standard Mystery Box" ) return 80;
+    if ( reason == "map has not published a standard Mystery Box registry" ) return 81;
+    if ( reason == "map has not published a standard between-round delay" ) return 82;
+    if ( reason == "map has not published a standard power-up drop capability" ) return 83;
+    if ( reason == "map has not published a standard power-up timeout capability" ) return 84;
+    if ( reason == "map has not published a standard zombie spawn cadence" ) return 85;
+    if ( reason == "map has not published an actor-damage callback" ) return 86;
+    if ( reason == "map mode did not publish its stock startup power state" ) return 87;
+    if ( reason == "map mode starts with power already enabled" ) return 88;
+    if ( reason == "map published an invalid bank denomination" ) return 89;
+    if ( reason == "map registered no activation-limited GobbleGums" ) return 90;
+    if ( reason == "map registered no compatible carried weapons" ) return 91;
+    if ( reason == "map registered no perks" ) return 92;
+    if ( reason == "map registered no round-limited GobbleGums" ) return 93;
+    if ( reason == "map registered no time-limited GobbleGums" ) return 94;
+    if ( reason == "map rejected its standard door-open requests" ) return 95;
+    if ( reason == "map replaces stock power-up pickup dispatch; classic Double Points/Insta-Kill remain map-owned" ) return 96;
+    return 0;
+}
+zt_notice_reason_96( reason )
+{
+    if ( reason == "map starts with power already enabled" ) return 97;
+    if ( reason == "map supplies a custom Insta-Kill lifecycle and remains authoritative" ) return 98;
+    if ( reason == "map's published power consumers rejected activation" ) return 99;
+    if ( reason == "map's registered power consumers were already enabled" ) return 100;
+    if ( reason == "map's starting loadout already fills every primary slot" ) return 101;
+    if ( reason == "map's stock always-on power path completed" ) return 102;
+    if ( reason == "map's stock always-on power path did not initialize" ) return 103;
+    if ( reason == "map's stock global-power consumers rejected activation" ) return 104;
+    if ( reason == "map-composed candidates are preserved, while stock safety and ownership exclusions remain" ) return 105;
+    if ( reason == "map-owned Insta-Kill override preserved" ) return 106;
+    if ( reason == "map-owned or multi-FX timed lifecycle preserved" ) return 107;
+    if ( reason == "no second registered weapon matches the selected class" ) return 108;
+    if ( reason == "opened common traversal blockers; custom, counter, airlock, and quest-owned blockers were preserved" ) return 109;
+    if ( reason == "opened every initialized ordinary door, linked barrier, debris group and Moon buy airlock" ) return 110;
+    if ( reason == "opened initialized ordinary traversal blockers; custom, counter, cycling-airlock and quest owners were preserved" ) return 111;
+    if ( reason == "ordinary enemy hits compose outside the map's actor-damage pipeline" ) return 112;
+    if ( reason == "pickup-bound stock lifecycle owner" ) return 113;
+    if ( reason == "pickup-owned fixed effects; timer-owned remaining effects" ) return 114;
+    if ( reason == "player already owns every registered perk" ) return 115;
+    if ( reason == "player-only power-up did not publish player timer vars; broader scopes were left untouched" ) return 116;
+    if ( reason == "powered all four stock grids and their portals/Pack-a-Punch; ritual count and completion remain map-owned" ) return 117;
+    if ( reason == "powered all six generator consumers; capture count and Pack-a-Punch progression remain map-owned" ) return 118;
+    if ( reason == "powered all six stock traversal stairs and published perk/door transformers; quest outputs 20/21/23 remain map-owned" ) return 119;
+    if ( reason == "powered generator perk consumers; captures, Mystery Boxes, and Pack-a-Punch remain map-owned" ) return 120;
+    if ( reason == "powered perk shock boxes; other Afterlife panels and quest state remain map-owned" ) return 121;
+    if ( reason == "powered published perk/door transformers; other Beast and quest interactions remain map-owned" ) return 122;
+    if ( reason == "powered registered consumers; the buildable switch, reactor, Avogadro, gates, bus, morse code, and quest flags remain map-owned" ) return 123;
+    if ( reason == "powered registered global consumers; custom switches, local power, and quest state remain map-owned" ) return 124;
+    if ( reason == "powered the map's published perk/door consumer zones" ) return 125;
+    if ( reason == "powered the stock global consumers and Verruckt trap controls" ) return 126;
+    if ( reason == "powered the stock global consumers, Pack-a-Punch and Giant traversal links" ) return 127;
+    if ( reason == "race-team Double Points has additional map-owned state and remains stock" ) return 128;
+    if ( reason == "round logic began before the tweak could be applied" ) return 129;
+    if ( reason == "scaled from BO2's stock base and composed with perk/map health bonuses" ) return 130;
+    if ( reason == "scaled the stock baseline before map special-round thresholds" ) return 131;
+    if ( reason == "selected NO ADDITIONAL RULE for this match" ) return 132;
+    if ( reason == "selected NO MYSTERY BOX for this match" ) return 133;
+    if ( reason == "selected NO PERKS for this match" ) return 134;
+    if ( reason == "selected RANDOM LOADOUT for this match" ) return 135;
+    if ( reason == "selected WALL WEAPONS ONLY for this match" ) return 136;
+    if ( reason == "selected equipment is not registered by this map" ) return 137;
+    if ( reason == "selected grenade is not registered by this map" ) return 138;
+    if ( reason == "selected weapon is not registered by this map" ) return 139;
+    if ( reason == "standard Mystery Boxes disabled" ) return 140;
+    if ( reason == "standard Mystery Boxes disabled; scripted quest rewards remain map-owned" ) return 141;
+    if ( reason == "standard door capability disappeared during map initialization" ) return 142;
+    if ( reason == "standard purchases and ZTweaks grants are blocked; scripted quest grants remain map-owned" ) return 143;
+    if ( reason == "stock classic co-op already permits unlimited ordinary downs" ) return 144;
+    return 0;
+}
+zt_notice_reason_144( reason )
+{
+    if ( reason == "stock earned score and box refunds are scaled; direct map score restoration remains map-owned" ) return 145;
+    if ( reason == "stock earned score is scaled; direct map score restoration remains map-owned" ) return 146;
+    if ( reason == "stock exposes completion notifications but no safe per-player pre-use veto" ) return 147;
+    if ( reason == "stock ordinary blocker routes did not publish completion" ) return 148;
+    if ( reason == "stock purchase-triggered relocation disabled; explicit map/quest moves remain map-owned" ) return 149;
+    if ( reason == "stock removes perks inside its private last-stand pipeline" ) return 150;
+    if ( reason == "stock weapon grant rejected the registered Pack-a-Punch upgrade" ) return 151;
+    if ( reason == "stock weapon grant rejected the selected firearm" ) return 152;
+    if ( reason == "the map does not publish a safe starting-zone exit set" ) return 153;
+    if ( reason == "the map exposes no standard bleed-out duration" ) return 154;
+    if ( reason == "the map exposes no universal safe Pack-a-Punch disable callback" ) return 155;
+    if ( reason == "the registered weapon pool cannot guarantee quest-safe replacement" ) return 156;
+    if ( reason == "the selected starting weapon has no registered Pack-a-Punch upgrade" ) return 157;
+    if ( reason == "unknown weapon class" ) return 158;
+    if ( reason == "waiting for game over" ) return 159;
+    if ( reason == "weapon assets still own the absolute engine ammo ceiling" ) return 160;
+    return 0;
+}
+// Generated from the portable warning transport template. Never hold spawn.
+zt_notice( code, fallback )
+{
+    if ( !isdefined( self ) || !isplayer( self ) ) return;
+    if ( code == 0 ) { self iprintlnbold( fallback ); return; }
+    if ( !isdefined( self.zt_notice_queue ) )
+    {
+        self.zt_notice_queue = [];
+        self.zt_notice_head = 0;
+    }
+    if ( self.zt_notice_queue.size - self.zt_notice_head >= 32 )
+    {
+        self iprintlnbold( fallback );
+        return;
+    }
+    entry = spawnstruct();
+    entry.code = code;
+    entry.fallback = fallback;
+    self.zt_notice_queue[self.zt_notice_queue.size] = entry;
+    if ( !isdefined( self.zt_notice_running ) || !self.zt_notice_running )
+    {
+        self.zt_notice_running = 1;
+        self thread zt_notice_worker();
+    }
+}
+
+zt_notice_worker()
+{
+    self endon( "disconnect" );
+    level endon( "end_game" );
+    self thread zt_notice_ack();
+    // Arm the response listener before publishing any packet.
+    wait 0.05;
+    while ( self.zt_notice_head < self.zt_notice_queue.size )
+    {
+        entry = self.zt_notice_queue[self.zt_notice_head];
+        if ( !isdefined( level.zt.notice_serial ) ) level.zt.notice_serial = gettime() % 4000000;
+        level.zt.notice_serial = ( level.zt.notice_serial % 8000000 ) + 1;
+        self.zt_notice_token = level.zt.notice_serial;
+        self.zt_notice_received = 0;
+        elapsed = 0;
+        while ( elapsed < 4 && !self.zt_notice_received )
+        {
+            // One initial send and one retry, serialized per player. No burst
+            // or per-frame reliable request; gameplay never waits for this.
+            if ( elapsed == 0 || elapsed == 2 )
+            {
+                self SetClientDvar( "zt_ui_notice_" + self getentitynumber(), zt_notice_signature() + "|" + self.zt_notice_token + "|" + entry.code + "|" + int( elapsed ) );
+            }
+            wait 0.25;
+            elapsed += 0.25;
+        }
+        if ( !self.zt_notice_received ) self iprintlnbold( entry.fallback );
+        self.zt_notice_head++;
+        wait 0.25;
+    }
+    self notify( "zt_notice_stop" );
+    self.zt_notice_queue = [];
+    self.zt_notice_head = 0;
+    self.zt_notice_running = 0;
+}
+
+zt_notice_ack()
+{
+    self endon( "disconnect" );
+    self endon( "zt_notice_stop" );
+    level endon( "end_game" );
+    while ( 1 )
+    {
+        self waittill( "menuresponse", menu, response );
+        if ( isdefined( self.zt_notice_token ) && isdefined( response ) &&
+            response == "zt_notice|" + self.zt_notice_token )
+            self.zt_notice_received = 1;
+    }
+}
+
+// ZT_NOTICE_DICTIONARY_END
 
 zt_game_ready()
 {
@@ -1508,7 +1836,7 @@ zt_character_wait_identity_ready( players )
         wait 0.25;
     }
     if ( isdefined( players[0] ) )
-        players[0] iprintln( "ZTweaks: character preferences skipped; a temporary player state remained active." );
+        players[0] zt_notice( 1, "ZTweaks: character preferences skipped; a temporary player state remained active." );
     return 0;
 }
 

@@ -2,7 +2,7 @@
 
 **Optional gameplay settings for Black Ops II Zombies (Plutonium T6)**
 
-ZTweaks v1.0, by Xep.
+ZTweaks, by Xep.
 
 [**Download the latest release**](https://github.com/Xeptix/ZTweaks/releases/latest)
 
@@ -21,14 +21,14 @@ want: DEFAULT leaves that part of the map in control.
 
 ## Requirements
 
-Plutonium T6, Black Ops II Zombies. ZTweaks is a **mod-only** release: its gameplay
-script and Lua settings menu belong together. No other Z mod is required. In co-op,
+Plutonium T6, Black Ops II Zombies. The selectable mod remains the recommended complete
+edition: its gameplay script, Lua settings menu and menu asset belong together. In co-op,
 the host controls shared gameplay rules; each player needs a compatible settings UI
 to supply their own character preference. A missing preference reply is treated as RANDOM.
 
 ## Install
 
-Download `ZTweaks T6 v1.0 by Xep.zip` and extract the whole archive.
+Download the latest versioned `ZTweaks T6` release ZIP and extract the whole archive.
 
 1. Run `installer/windows/install.bat`. The installer targets your Plutonium folder;
    use `-Root "path\to\Plutonium"` for a different location.
@@ -38,8 +38,24 @@ Download `ZTweaks T6 v1.0 by Xep.zip` and extract the whole archive.
 
 On Linux, run `bash installer/linux/install.sh --root /path/to/Plutonium`.
 For a manual installation, copy the archive's `Plutonium` folder into `%LOCALAPPDATA%`.
-The mod lives in `Plutonium/storage/t6/mods/zm_ztweaks`; there is no loose-script edition.
+The mod lives in `Plutonium/storage/t6/mods/zm_ztweaks`.
 The included `SHA256SUMS` files cover the download and its contents.
+
+## Loose script edition
+
+The download also carries a loose gameplay script at
+`Plutonium/storage/t6/scripts/zm/ztweaks.gsc`. T6 cannot load the Lua lobby/pause menu
+from a loose script, so that edition has no graphical settings page, menu background or
+way for each co-op player to send a personal character choice. Configure its gameplay
+dvars outside the menu; use the selectable mod for the complete interface and co-op
+character preferences. The
+loose script does not save settings through a graphical menu: only dvars supplied by
+an external configuration or console apply.
+
+Install that edition with `install.ps1 -Slot t6-script` or
+`install.sh --slot t6-script`; the default slot remains `t6-mod`. Both installers also
+support `-List/--list`, `-Find/--find`, `-Verify/--verify`,
+`-Configure/--configure`, and ownership-safe `-Uninstall/--uninstall` operations.
 
 The installer also supplies `storage/t6/images/menu_zm_cac_backing.iwi`, the shared menu
 background. It backs up a pre-existing replacement and restores it on uninstall when
@@ -223,6 +239,17 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ## Changelog
 
+### v1.1
+
+- Twelve-language menu and notice catalogs with English fallback and portable,
+  owner-aware localization for standalone and ZBundle rows.
+- A limited loose-script route with ownership-safe Windows/Linux installers and
+  explicit menu, persistence, and co-op preference limitations.
+- Shared menu/action authority fixes, collision-safe ZBundle integration, and
+  stricter reproducible packaging and installer lifecycle checks.
+- Compatibility-first map adapters retain stock ownership when a custom map does
+  not expose a supported system; the stock-map matrix covers every BO2 Zombies route.
+
 ### v1.0
 
 - Settings menu hardening: effective disabled/forced values, grey inactive rows,
@@ -237,6 +264,17 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ## Credits and support
 
+### Translations
+
+ZTweaks supports English, French, German, Italian, Spanish,
+Brazilian Portuguese, Russian, Polish, Japanese, Simplified and Traditional Chinese,
+Korean, and Czech. Translations were made by AI and may contain mistakes.
+Please [report incorrect or unclear translations](https://github.com/Xeptix/ZTweaks/issues)
+so I can get them fixed. Include the game, version, language, menu or setting,
+current wording and suggested correction; a screenshot is helpful.
+
 By Xep. Built around Treyarch's Zombies systems. MIT licensed; see [LICENSE](LICENSE).
 
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F6L1285ROA)
+[![Support the mod on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/xeptix)
+[![Support the mod on Patreon](https://img.shields.io/badge/Patreon-Xeptix-F96854?logo=patreon&logoColor=white)](https://www.patreon.com/Xeptix)
+[![Join the Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/RE85HRwYZZ)

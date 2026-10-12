@@ -1,0 +1,3 @@
+# The public repository is the exact unpacked download. Keep its bytes unchanged
+# through Git checkout so SHA256SUMS and executable shell scripts remain valid.
+* -text
