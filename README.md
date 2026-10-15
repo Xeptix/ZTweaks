@@ -239,6 +239,12 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ## Changelog
 
+### v1.3
+
+- This maintenance release keeps the BO2 gameplay and menu settings from v1.2.
+- The BO2 package is rebuilt alongside the BO3 co-op loading fix so both editions
+  carry the same release version and installer contract.
+
 ### v1.2
 
 - New starting-weapon Pack-a-Punch, standard Box/Fire Sale/trap pricing, box teddy
