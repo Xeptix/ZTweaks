@@ -56,6 +56,14 @@ Dvar: `zt_game_start_delay`. Default: `-1`. Applies: NEXT MATCH.
 
 Choices: `-1` = GAME DEFAULT, `0` = NO EXTRA DELAY, `2` = 2 SECONDS, `5` = 5 SECONDS, `10` = 10 SECONDS, `15` = 15 SECONDS, `20` = 20 SECONDS, `30` = 30 SECONDS.
 
+### EXPERIMENTAL TWEAKS
+
+Allow selected stock-map-only tweaks. Custom-map support may be limited. OFF makes every experimental tweak inert even if its own saved option is ON; it does not relax compatibility checks or other Z mods' ownership.
+
+Dvar: `zt_experimental_tweaks`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
 ## PLAYER
 
 ### PERK LIMIT
@@ -73,6 +81,14 @@ Percentage of normal player health. GAME DEFAULT leaves the map in control. Perk
 Dvar: `zt_player_health`. Default: `0`. Applies: NEXT SPAWN.
 
 Choices: `0` = GAME DEFAULT, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
+
+### HEALTH REGEN DELAY
+
+Percentage of the stock delay before health regeneration begins after damage. GAME DEFAULT preserves the map's delay. This does not change the regeneration rate or map-owned healing systems.
+
+Dvar: `zt_health_regen_delay`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = GAME DEFAULT, `50` = 50%, `150` = 150%, `200` = 200%.
 
 ### PLAYER SPEED
 
@@ -106,6 +122,14 @@ Dvar: `zt_point_gain`. Default: `0`. Applies: NEXT MATCH.
 
 Choices: `0` = GAME DEFAULT, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
 
+### POINTS RETAINED AFTER DEATH
+
+Percentage of points kept at the next standard spectator respawn, after any stock minimum-respawn score is applied. The rest is lost. GAME DEFAULT preserves the map's death penalty; custom death-score rules remain map-owned.
+
+Dvar: `zt_death_points_retained`. Default: `-1`. Applies: NEXT MATCH.
+
+Choices: `-1` = GAME DEFAULT, `100` = 100%, `50` = 50%, `0` = 0%.
+
 ### WEAPON DAMAGE
 
 Percentage of normal player weapon damage dealt to zombies. Melee uses its own setting. GAME DEFAULT preserves the stock and custom-map damage path.
@@ -121,6 +145,14 @@ Percentage of normal player melee damage dealt to zombies. GAME DEFAULT leaves k
 Dvar: `zt_melee_damage`. Default: `0`. Applies: NEXT MATCH.
 
 Choices: `0` = GAME DEFAULT, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
+
+### PACK-A-PUNCH DAMAGE
+
+Scale ordinary hits from registered Pack-a-Punched weapons against standard zombies. GAME DEFAULT preserves normal damage. Custom upgrades and map-owned damage callbacks remain unchanged.
+
+Dvar: `zt_pap_damage_multiplier`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = GAME DEFAULT, `50` = 50%, `150` = 150%, `200` = 200%.
 
 ### EXPLOSIVE SELF-DAMAGE
 
@@ -318,7 +350,7 @@ Dvar: `zt_reserve_ammo`. Default: `0`. Applies: NEXT SPAWN.
 
 Choices: `0` = GAME DEFAULT, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
 
-### STARTING WEAPON UPGRADED
+### STARTING WEAPON PACK-A-PUNCHED
 
 Spawn with the selected ZTweaks starting weapon slots Pack-a-Punched when the map registers a safe upgraded variant. MAP DEFAULT leaves both slots unmodified.
 
@@ -335,6 +367,14 @@ Percentage of the map's normal zombie-health curve. GAME DEFAULT leaves both sta
 Dvar: `zt_zombie_health`. Default: `0`. Applies: NEXT MATCH.
 
 Choices: `0` = GAME DEFAULT, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%, `150` = 150%, `200` = 200%, `300` = 300%, `500` = 500%, `-1` = RANDOM.
+
+### ZOMBIE DAMAGE
+
+Percentage of direct damage dealt to players by ordinary zombies. GAME DEFAULT preserves map damage; bosses, quest actors, traps, and environmental damage remain map-controlled.
+
+Dvar: `zt_zombie_damage`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = GAME DEFAULT, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
 
 ### ZOMBIE SPEED
 
@@ -360,6 +400,14 @@ Dvar: `zt_round_delay`. Default: `-1`. Applies: NEXT MATCH.
 
 Choices: `-1` = GAME DEFAULT, `0` = INSTANT, `2` = 2 SECONDS, `5` = 5 SECONDS, `10` = 10 SECONDS, `15` = 15 SECONDS, `20` = 20 SECONDS, `30` = 30 SECONDS.
 
+### ROUND BONUS
+
+Extra points awarded to each active player when a standard round ends. GAME DEFAULT adds no bonus. Map-authored round rewards remain unchanged.
+
+Dvar: `zt_round_bonus`. Default: `0`. Applies: NEXT ROUND.
+
+Choices: `0` = GAME DEFAULT, `100` = 100, `250` = 250, `500` = 500.
+
 ### ZOMBIE SPAWN RATE
 
 Percentage of the map's normal standard-zombie spawn cadence. Higher values shorten the delay between ordinary spawns. GAME DEFAULT is inert; special, objective, and scripted spawners remain map-controlled.
@@ -369,6 +417,14 @@ Dvar: `zt_zombie_spawn_rate`. Default: `0`. Applies: NEXT MATCH.
 Choices: `0` = GAME DEFAULT, `50` = 50%, `75` = 75%, `100` = 100%, `125` = 125%, `150` = 150%, `200` = 200%, `300` = 300%.
 
 ## WORLD
+
+### FASTER BARRIER REBUILD
+
+Reduce the pause between standard barrier-board repairs. Requires Experimental Tweaks. Available only on recognized stock maps with the stock blocker system; custom-map support may be limited. A map-authored repair delay always wins.
+
+Dvar: `zt_fast_barrier_rebuild`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
 
 ### START WITH POWER ON
 
@@ -383,6 +439,62 @@ Choices: `0` = OFF, `1` = ON.
 Open ordinary, delayed, and power-gated purchasable doors, barriers, debris, and airlocks for free through their stock blocker paths after the first player spawns. Kill-counter and custom scripted quest blockers remain map-controlled.
 
 Dvar: `zt_start_doors_open`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### MAX AMMO RELOADS MAGAZINES
+
+After a standard Max Ammo pickup refills reserves, also refill the magazines of eligible held firearms. OFF preserves stock behavior. Quest equipment, excluded weapons, custom ammo systems, and a replacement weapon acquired during pickup remain untouched.
+
+Dvar: `zt_max_ammo_reload`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE NUKE DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_nuke_drops`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE MAX AMMO DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_max_ammo_drops`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE INSTA-KILL DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_insta_kill_drops`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE DOUBLE POINTS DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_double_points_drops`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE CARPENTER DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_carpenter_drops`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### DISABLE FIRE SALE DROPS
+
+Exclude this type from regular random drops when another eligible type exists. Scripted drops are unchanged. If all are excluded, one eligible type remains to avoid stalling the game.
+
+Dvar: `zt_disable_fire_sale_drops`. Default: `0`. Applies: NEXT MATCH.
 
 Choices: `0` = OFF, `1` = ON.
 
@@ -417,6 +529,46 @@ Maximum regular score-threshold power-up drops allowed in each round. GAME DEFAU
 Dvar: `zt_powerup_max_per_round`. Default: `0`. Applies: NEXT MATCH.
 
 Choices: `0` = GAME DEFAULT, `1` = 1, `2` = 2, `3` = 3, `4` = 4, `5` = 5, `6` = 6, `8` = 8, `10` = 10.
+
+### TRAP PRICE
+
+Percentage of each standard purchasable trap's map-authored price. GAME DEFAULT leaves the trap alone. Custom trap purchase callbacks and later map price changes remain map-controlled; maps without standard purchase traps are unaffected.
+
+Dvar: `zt_trap_price_multiplier`. Default: `-1`. Applies: NEXT MATCH.
+
+Choices: `-1` = GAME DEFAULT, `0` = FREE, `50` = 50%, `200` = 200%.
+
+### MYSTERY BOX PRICE
+
+Percentage of each standard Mystery Box location's map-authored normal price. GAME DEFAULT preserves each location's own price. FREE affects ordinary box purchases but does not change the Fire Sale price.
+
+Dvar: `zt_box_price_multiplier`. Default: `-1`. Applies: NEXT MATCH.
+
+Choices: `-1` = GAME DEFAULT, `0` = FREE, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%, `150` = 150%, `200` = 200%.
+
+### FIRE SALE BOX PRICE
+
+Point cost of standard Mystery Boxes while Fire Sale is active. GAME DEFAULT preserves the stock or map-authored sale price. Normal box prices and map-authored nonstandard weapon lotteries remain untouched.
+
+Dvar: `zt_fire_sale_box_price`. Default: `-1`. Applies: NEXT FIRE SALE.
+
+Choices: `-1` = GAME DEFAULT, `0` = FREE, `10` = 10, `50` = 50, `100` = 100, `250` = 250, `500` = 500, `950` = 950.
+
+### TEDDY-BEAR CHANCE
+
+Chance of a teddy bear on each eligible standard Mystery Box pull. GAME DEFAULT keeps the map's chance. The map's minimum pulls, no-fly-away boxes, Fire Sales, and custom chance callbacks remain protected; 0% prevents ordinary teddy-bear moves.
+
+Dvar: `zt_teddy_chance`. Default: `-1`. Applies: NEXT MATCH.
+
+Choices: `-1` = GAME DEFAULT, `0` = 0%, `25` = 25%, `50` = 50%, `75` = 75%, `100` = 100%.
+
+### AVOID REPEAT BOX WEAPONS
+
+Avoid offering the same weapon on two consecutive standard Mystery Box pulls by the same player when another eligible registered weapon exists. OFF keeps stock selection. Map-authored special picks and weapon eligibility remain unchanged.
+
+Dvar: `zt_box_no_repeat`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
 
 ### MYSTERY BOX QUALITY
 
@@ -515,6 +667,22 @@ Choose an independent compatible registered starting weapon loadout for each pla
 Dvar: `zt_challenge_random_loadout`. Default: `0`. Applies: NEXT SPAWN.
 
 Choices: `0` = OFF, `1` = ON.
+
+### ONE WEAPON SLOT
+
+Limit normal weapon pickups to one primary slot through the stock weapon-limit callback. ZTweaks will not grant a secondary starting weapon. Map-owned weapon limits and scripted quest inventory remain in control.
+
+Dvar: `zt_challenge_one_weapon_slot`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `1` = ON.
+
+### RISING PLAYER DAMAGE
+
+Increase ordinary player weapon and melee damage against standard zombies each round after round 1. The selected percentage is added per round, up to 500% of normal damage. OFF preserves the map's damage. Quest actors, friendly NPCs, and map-owned damage callbacks remain protected.
+
+Dvar: `zt_challenge_rising_damage`. Default: `0`. Applies: NEXT MATCH.
+
+Choices: `0` = OFF, `5` = 5%, `10` = 10%, `25` = 25%.
 
 ### RANDOMIZED RULES
 

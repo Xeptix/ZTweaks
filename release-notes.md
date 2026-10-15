@@ -1,26 +1,29 @@
-# ZTweaks 1.1 for Black Ops II Zombies
+# ZTweaks 1.2 for Black Ops II Zombies
 
-ZTweaks 1.1 expands the original gameplay-settings mod with complete menu localization, safer distribution, and stronger compatibility guarantees.
+ZTweaks 1.2 adds optional gameplay controls while keeping DEFAULT inert and leaving unsupported or map-owned systems alone.
 
 ## New
 
-- English and twelve non-English menu and notice catalogs, with English fallback and owner-aware translation in standalone ZTweaks and ZBundle.
-- A limited portable T6 script edition with Windows and Linux installers. The full mod remains recommended because loose scripts cannot provide the Lua menu, lobby preference sender, or every fastfile-owned presentation feature.
-- Reversible installer ownership: repeat installs preserve the original backup, read-only discovery does not create state, verification reports exact installed versions, and uninstall restores pre-existing files.
-- Shared menu and action contracts preserve native navigation, focus, press-only actions, host locks, changed-setting rows, and translation ownership when ZTweaks is composed into ZBundle.
-- Compatibility-first gameplay adapters and a source audit covering every stock BO2 Zombies route. Unknown custom-map systems remain map-owned when a safe adapter is unavailable.
+- Starting-weapon Pack-a-Punch selection, standard Mystery Box and Fire Sale prices, teddy-bear chance, and an option to avoid immediately repeated ordinary box offers.
+- Standard trap prices, a round-end points bonus, and configurable points retained after an ordinary death and respawn.
+- Zombie melee damage, health-regeneration delay, rising player damage by round, and damage from registered Pack-a-Punched weapons against standard zombies.
+- Optional Max Ammo magazine reload, a One Weapon Slot challenge, and six independent exclusions from ordinary random power-up drops.
+- A default-OFF Experimental Tweaks gate for Faster Barrier Rebuild on compatible stock maps. Custom maps and map-authored repair delays remain untouched.
+- The shared-menu tab window now stays in place when changing a setting.
 
-All existing match, player, loadout, zombie, world, bank, power-up, challenge, restart, rotation, and named character-preference settings remain available. DEFAULT continues to preserve map behavior.
+BO2 does not show BO3-only Alternate Ammo Type, Perk Price, or Wunderfizz Price controls. Other purchase loops and custom-map systems without a verified safe seam remain under the game's or map's control; an enabled setting does not override them by guesswork. The compatibility report explains when an option cannot apply.
 
-Translations were made by AI and may contain mistakes. ChatGPT produced the initial translations; please report inaccurate wording with the game, language, menu or setting, current wording, and a suggested correction.
+All previous settings, character preferences, translations, and installer routes remain available. The menus support English and twelve non-English languages. ChatGPT produced the initial translations; please report inaccurate wording with the game, language, setting, current text, and a suggested correction.
 
 ## Download
 
-Download **ZTweaks T6 v1.1 by Xep.zip** from GitHub Releases.
+Download **ZTweaks T6 v1.2 by Xep.zip** from GitHub Releases.
 
 ## Install
 
-Extract the ZIP and run `installer/windows/install.bat`. Linux users can run `bash installer/linux/install.sh --root /path/to/Plutonium`. Select **zm_ztweaks** under **Mods** and open **ZTWEAKS SETTINGS** in the Zombies lobby.
+Extract the ZIP and run `installer/windows/install.bat`. Linux users can run `bash installer/linux/install.sh --root /path/to/Plutonium`. Select **zm_ztweaks** under **Mods**, then open **ZTWEAKS SETTINGS** in the Zombies lobby.
+
+The complete mod is recommended. A limited loose-script route cannot provide the full Lua menu or every presentation feature. Use ZBundle to combine ZTweaks with the other Z mods.
 
 Documentation: https://github.com/Xeptix/ZTweaks
 

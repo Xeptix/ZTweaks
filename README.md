@@ -239,6 +239,18 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ## Changelog
 
+### v1.2
+
+- New starting-weapon Pack-a-Punch, standard Box/Fire Sale/trap pricing, box teddy
+  and repeat controls, six ordinary power-up exclusions, and One Weapon Slot.
+- New ordinary combat and reward controls: melee and Pack-a-Punch damage, health
+  regeneration delay, rising player damage, round bonus, Max Ammo reload, and
+  points retained after an ordinary death.
+- Experimental Tweaks defaults OFF. Its Faster Barrier Rebuild option only acts
+  on compatible stock barriers; enabling it never forces unsupported custom maps.
+- The shared menu retains the visible tab window after a setting change. Unsupported
+  systems report a compatibility reason and keep the map's own behavior.
+
 ### v1.1
 
 - Twelve-language menu and notice catalogs with English fallback and portable,
@@ -268,7 +280,7 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ZTweaks supports English, French, German, Italian, Spanish,
 Brazilian Portuguese, Russian, Polish, Japanese, Simplified and Traditional Chinese,
-Korean, and Czech. Translations were made by AI and may contain mistakes.
+Korean, and Czech. Initial translations were made with ChatGPT and may contain mistakes.
 Please [report incorrect or unclear translations](https://github.com/Xeptix/ZTweaks/issues)
 so I can get them fixed. Include the game, version, language, menu or setting,
 current wording and suggested correction; a screenshot is helpful.
