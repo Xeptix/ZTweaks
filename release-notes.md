@@ -1,12 +1,12 @@
-# ZTweaks 1.3 for Black Ops II Zombies
+# ZTweaks 1.4 for Black Ops II Zombies
 
-This maintenance release rebuilds the BO2 edition alongside the BO3 co-op loading fix. BO2 gameplay settings, menus, character preferences, translations, and installer behavior are unchanged from the previous release.
+ZTweaks 1.4 paces the initial co-op Compatibility report after round readiness. Instead of sending every active status row to a joining client at once, it waits five seconds and sends rows at short intervals. Live status changes remain available. BO2 gameplay settings and menu choices are unchanged.
 
-DEFAULT remains inert, and unsupported or map-owned systems stay under the game's or map's control. The compatibility report explains when a selected option cannot apply.
+DEFAULT remains inert. When a map owns a system or does not expose a safe path, ZTweaks leaves it alone and explains the result on the Compatibility page.
 
 ## Download and install
 
-Download **ZTweaks T6 v1.3 by Xep.zip** from GitHub Releases. Extract the ZIP and run `installer/windows/install.bat`. Linux users can run `bash installer/linux/install.sh --root /path/to/Plutonium`. Select **zm_ztweaks** under **Mods**, then open **ZTWEAKS SETTINGS** in the Zombies lobby.
+Download **ZTweaks T6 v1.4 by Xep.zip** from [GitHub Releases](https://github.com/Xeptix/ZTweaks/releases). Extract it and run `installer/windows/install.bat`. Linux users can run `bash installer/linux/install.sh --root /path/to/Plutonium`. Select **zm_ztweaks** under **Mods**, then open **ZTWEAKS SETTINGS** in the Zombies lobby.
 
 The complete mod is recommended. A limited loose-script route cannot provide the full Lua menu or every presentation feature. Use ZBundle to combine ZTweaks with the other Z mods.
 

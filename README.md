@@ -239,6 +239,13 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ## Changelog
 
+### v1.4
+
+- Pace the initial co-op Compatibility report after round readiness instead of
+  sending all active rows at once. Live status changes still appear.
+- The BO2 gameplay choices and menu remain unchanged; unsupported map systems
+  continue to fail safe.
+
 ### v1.3
 
 - This maintenance release keeps the BO2 gameplay and menu settings from v1.2.
@@ -286,7 +293,8 @@ capacity is BO2-only; GobbleGum scaling is BO3-only. Map availability can differ
 
 ZTweaks supports English, French, German, Italian, Spanish,
 Brazilian Portuguese, Russian, Polish, Japanese, Simplified and Traditional Chinese,
-Korean, and Czech. Initial translations were made with ChatGPT and may contain mistakes.
+Korean, and Czech. Translations were made by AI and may contain mistakes.
+ChatGPT produced the initial translations.
 Please [report incorrect or unclear translations](https://github.com/Xeptix/ZTweaks/issues)
 so I can get them fixed. Include the game, version, language, menu or setting,
 current wording and suggested correction; a screenshot is helpful.
